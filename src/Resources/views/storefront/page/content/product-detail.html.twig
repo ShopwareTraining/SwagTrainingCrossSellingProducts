@@ -4,7 +4,19 @@
 
 {% block page_content %}
     <div class="container">
-        {{  dump(page.extensions.crossSellingProducts) }}
+        <div class="row row-cols-3">
+            {% for product in page.extensions.crossSellingProducts.products %}
+                <div>
+                    {% sw_thumbnails 'my-thumbnails' with {
+                        media: product.cover.media
+                    } %}
+
+                    <h3>{{ product.translated.name }}</h3>
+                    <strong>{{ product.translated.description }}</strong>
+                </div>
+            {% endfor %}
+        </div>
+
     </div>
     {{ parent() }}
 {% endblock %}
