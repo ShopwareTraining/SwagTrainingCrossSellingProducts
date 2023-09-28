@@ -1,0 +1,40 @@
+{
+  "name": "swag-training/shopware6-cross-selling-products",
+  "description": "Example for selecting products in admin and showing them in storefront",
+  "type": "shopware-platform-plugin",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Jisse Reitsma"
+    }
+  ],
+  "require": {
+    "shopware/core": "~6.4"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "SwagTraining\\CrossSellingProducts\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "SwagTraining\\CrossSellingProducts\\SwagTrainingCrossSellingProducts",
+    "copyright": "Jisse Reitsma",
+    "label": {
+      "de-DE": "SwagTrainingCrossSellingProducts",
+      "en-GB": "SwagTrainingCrossSellingProducts"
+    },
+    "description": {
+      "de-DE": "Example for selecting products in admin and showing them in storefront",
+      "en-GB": "Example for selecting products in admin and showing them in storefront"
+    },
+    "manufacturerLink": {
+      "de-DE": "https://acme.org",
+      "en-GB": "https://acme.org"
+    },
+    "supportLink": {
+      "de-DE": "https://acme.org",
+      "en-GB": "https://acme.org"
+    }
+  }
+}
