@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SwagTraining\CrossSellingProducts\Event;
+namespace SwagTraining\UpsellingProducts\Event;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AddCrossSellingProductsToProductPageSubscriber implements EventSubscriberInterface
+class AddUpsellingProductsToProductPageSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         #[Autowire(service: 'sales_channel.product.repository')] private SalesChannelRepository $productRepository,
@@ -31,7 +31,7 @@ class AddCrossSellingProductsToProductPageSubscriber implements EventSubscriberI
         $productIds = $this->getProductIdsFromConfig($event);
         $products = $this->getProductsFromProductIds($event, $productIds);
         $data = ['products' => $products];
-        $event->getPage()->addArrayExtension('crossSellingProducts', $data);
+        $event->getPage()->addArrayExtension('upsellingProducts', $data);
     }
 
     /**
@@ -53,6 +53,6 @@ class AddCrossSellingProductsToProductPageSubscriber implements EventSubscriberI
     private function getProductIdsFromConfig(ProductPageLoadedEvent $event): array
     {
         $salesChannelId = $event->getSalesChannelContext()->getSalesChannelId();
-        return $this->systemConfigService->get('SwagTrainingCrossSellingProducts.config.products', $salesChannelId);
+        return $this->systemConfigService->get('SwagTrainingUpsellingProducts.config.products', $salesChannelId);
     }
 }

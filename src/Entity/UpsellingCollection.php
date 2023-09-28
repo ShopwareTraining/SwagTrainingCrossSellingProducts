@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SwagTraining\CrossSellingProducts\Entity;
+namespace SwagTraining\UpsellingProducts\Entity;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 

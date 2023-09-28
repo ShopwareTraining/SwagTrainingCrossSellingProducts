@@ -1,12 +1,12 @@
 {% sw_extends '@Storefront/storefront/page/content/product-detail.html.twig' %}
 
-{% set crossSellingProducts = config('SwagTrainingCrossSellingProducts.config.products') %}
+{% set upsellingProducts = config('SwagTrainingUpsellingProducts.config.products') %}
 
 {% block page_content %}
-    <div class="container">\
+    <div class="container">
         {{ dump(page.product) }}
         <div class="row row-cols-3">
-            {% for product in page.extensions.crossSellingProducts.products %}
+            {% for product in upsellingProducts %}
                 <div>
                     {% sw_thumbnails 'my-thumbnails' with {
                         media: product.cover.media

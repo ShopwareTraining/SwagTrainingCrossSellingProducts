@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SwagTraining\CrossSellingProducts\Test\Integration;
+namespace SwagTraining\UpsellingProducts\Test\Integration;
 
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Framework\Context;
@@ -13,8 +13,6 @@ class PluginTest extends TestCase
 
     public function testHelloWorld()
     {
-        $this->assertTrue(false);
-
         $container = $this->getContainer();
         $upsellingProductsRepository = $container->get('product_upselling.repository');
 

@@ -1,6 +1,6 @@
 import './component/sw-product-detail-upselling';
 
-Shopware.Module.register('swag-training-cross-selling-products', {
+Shopware.Module.register('swag-training-upselling-products', {
     routeMiddleware(next, currentRoute) {
         if (currentRoute.name === 'sw.product.detail') {
             currentRoute.children.push({

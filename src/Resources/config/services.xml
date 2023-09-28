@@ -5,7 +5,11 @@
            xsi:schemaLocation="https://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <prototype namespace="SwagTraining\CrossSellingProducts\" resource="../../" autowire="true"
-                   autoconfigure="true"/>
+        <prototype
+                namespace="SwagTraining\UpsellingProducts\"
+                resource="../../"
+                autowire="true"
+                autoconfigure="true"
+        />
     </services>
 </container>

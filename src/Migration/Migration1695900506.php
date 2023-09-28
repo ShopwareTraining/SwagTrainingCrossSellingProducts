@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SwagTraining\CrossSellingProducts\Migration;
+namespace SwagTraining\UpsellingProducts\Migration;
 
 use Doctrine\DBAL\Connection;
 use Shopware\Core\Framework\Migration\MigrationStep;
@@ -16,12 +16,11 @@ class Migration1695900506 extends MigrationStep
     {
         $sql = <<<'SQL'
 CREATE TABLE IF NOT EXISTS `product_upselling` (
-    `id` BINARY(16) NOT NULL,
-    `product_id` BINARY(16) NULL,
-    `upselling_product_id` BINARY(16) NULL,
+    `product_id` BINARY(16) NOT NULL,
+    `upselling_product_id` BINARY(16) NOT NULL,
     `created_at` DATETIME(3) NOT NULL,
     `updated_at` DATETIME(3) NULL,
-    PRIMARY KEY (`id`),
+    PRIMARY KEY (`product_id`, `upselling_product_id`),
     KEY `fk.product_upselling.product_id` (`product_id`),
     CONSTRAINT `fk.product_upselling.product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -31,6 +30,5 @@ SQL;
 
     public function updateDestructive(Connection $connection): void
     {
-        // implement update destructive
     }
 }

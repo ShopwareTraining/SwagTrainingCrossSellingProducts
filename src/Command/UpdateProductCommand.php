@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SwagTraining\CrossSellingProducts\Command;
+namespace SwagTraining\UpsellingProducts\Command;
 
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
@@ -30,10 +30,8 @@ class UpdateProductCommand extends Command
             [
                 'id' => $productId,
                 'upsellingProducts' => [
-                    [
-                        'productId' => $productId,
-                        'upsellingProductId' => $upsellingProductId
-                    ]
+                    'productId' => $productId,
+                    'upsellingProductId' => $upsellingProductId
                 ]
             ]
         ], Context::createDefaultContext());

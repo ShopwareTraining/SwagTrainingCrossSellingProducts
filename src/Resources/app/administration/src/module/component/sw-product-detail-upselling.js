@@ -27,7 +27,7 @@ Shopware.Component.register('sw-product-detail-upselling', {
     template,
 
     created() {
-        this.systemConfigApiService.getValues('SwagTrainingCrossSellingProducts.config.products')
+        this.systemConfigApiService.getValues('SwagTrainingUpsellingProducts.config.products')
             .then((values) => {
                 Object.keys(values).forEach((key) => {
                     this.productIds.push(values[key]);
