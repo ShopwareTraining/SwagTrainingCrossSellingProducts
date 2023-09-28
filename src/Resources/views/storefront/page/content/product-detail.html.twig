@@ -1,0 +1,11 @@
+{% sw_extends '@Storefront/storefront/page/content/product-detail.html.twig' %}
+
+{% set crossSellingProducts = config('SwagTrainingCrossSellingProducts.config.products') %}
+{% set crossSellingProducts = page.product.crossSellingProducts %}
+
+{% block page_content %}
+    <div class="container">
+        {{  dump() }}
+    </div>
+    {{ parent() }}
+{% endblock %}
