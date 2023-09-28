@@ -1,0 +1,18 @@
+{% block sw_product_basic_form_title_field %}
+    {% parent %}
+
+    <sw-inherit-wrapper
+            v-model="product.foobar"
+            :inherited-value="getInheritValue('translated', 'name')"
+    >
+        <template #content="props">
+            <sw-text-field
+                    :value="props.currentValue"
+                    label="Just an example"
+                    name="sw-field--product-foobar"
+                    @input="props.updateCurrentValue"
+            />
+        </template>
+    </sw-inherit-wrapper>
+
+{% endblock %}

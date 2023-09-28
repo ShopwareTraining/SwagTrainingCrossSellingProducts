@@ -1,0 +1,12 @@
+
+{% block sw_product_detail_content_tabs_specifications %}
+    {% parent %}
+
+    <sw-tabs-item
+            class="sw-product-detail__tab-upselling"
+            :route="{ name: 'sw.product.detail.upselling', params: { id: $route.params.id } }"
+            title="Upselling"
+    >
+        Upselling
+    </sw-tabs-item>
+{% endblock %}
