@@ -21,7 +21,9 @@ CREATE TABLE IF NOT EXISTS `product_upselling` (
     `upselling_product_id` BINARY(16) NULL,
     `created_at` DATETIME(3) NOT NULL,
     `updated_at` DATETIME(3) NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    KEY `fk.product_upselling.product_id` (`product_id`),
+    CONSTRAINT `fk.product_upselling.product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 SQL;
         $connection->executeStatement($sql);
