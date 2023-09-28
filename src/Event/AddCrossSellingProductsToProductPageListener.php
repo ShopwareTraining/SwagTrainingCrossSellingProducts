@@ -2,25 +2,30 @@
 
 namespace SwagTraining\CrossSellingProducts\Event;
 
-use Shopware\Core\Framework\Context;
-use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Shopware\Storefront\Page\Product\ProductPageLoadedEvent;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
+#[AsEventListener(event: ProductPageLoadedEvent::class)]
 class AddCrossSellingProductsToProductPageListener
 {
     public function __construct(
         private SystemConfigService $systemConfigService
     ) {}
 
-    public function addDataToProductPage(ProductPageLoadedEvent $event)
+    public function __invoke(ProductPageLoadedEvent $event)
+    {
+        $products = ['fsdf' => $this->getProductIdsFromConfig($event)];
+        $event->getPage()->addArrayExtension('crossSellingProducts', $products);
+    }
+
+    /**
+     * @param ProductPageLoadedEvent $event
+     * @return string[]
+     */
+    private function getProductIdsFromConfig(ProductPageLoadedEvent $event): array
     {
         $salesChannelId = $event->getSalesChannelContext()->getSalesChannelId();
-        $productIds = $this->systemConfigService->get('SwagTrainingCrossSellingProducts.config.products', $salesChannelId);
-        $products = ['fsdf' => $productIds];
-
-        $event->getPage()->addArrayExtension('crossSellingProducts', $products);
+        return $this->systemConfigService->get('SwagTrainingCrossSellingProducts.config.products', $salesChannelId);
     }
 }
