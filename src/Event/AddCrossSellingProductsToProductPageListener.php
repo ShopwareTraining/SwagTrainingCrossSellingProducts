@@ -2,21 +2,40 @@
 
 namespace SwagTraining\CrossSellingProducts\Event;
 
+use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
+use Shopware\Core\System\SalesChannel\Entity\SalesChannelRepository;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Shopware\Storefront\Page\Product\ProductPageLoadedEvent;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 #[AsEventListener(event: ProductPageLoadedEvent::class)]
 class AddCrossSellingProductsToProductPageListener
 {
     public function __construct(
+        #[Autowire(service: 'sales_channel.product.repository')] private SalesChannelRepository $productRepository,
         private SystemConfigService $systemConfigService
     ) {}
 
     public function __invoke(ProductPageLoadedEvent $event)
     {
-        $products = ['fsdf' => $this->getProductIdsFromConfig($event)];
-        $event->getPage()->addArrayExtension('crossSellingProducts', $products);
+        $productIds = $this->getProductIdsFromConfig($event);
+        $products = $this->getProductsFromProductIds($event, $productIds);
+        $data = ['products' => $products];
+        $event->getPage()->addArrayExtension('crossSellingProducts', $data);
+    }
+
+    /**
+     * @param ProductPageLoadedEvent $event
+     * @param array $productIds
+     * @return EntityCollection
+     */
+    private function getProductsFromProductIds(ProductPageLoadedEvent $event, array $productIds): EntityCollection
+    {
+        $criteria = new Criteria($productIds);
+        $context = $event->getSalesChannelContext();
+        return $this->productRepository->search($criteria, $context)->getEntities();
     }
 
     /**
