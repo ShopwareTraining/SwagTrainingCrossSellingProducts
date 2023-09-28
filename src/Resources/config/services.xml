@@ -5,5 +5,8 @@
            xsi:schemaLocation="https://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="SwagTraining\CrossSellingProducts\Event\AddCrossSellingProductsToProductPageListener">
+            <tag name="kernel.event_listener" event="Shopware\Storefront\Page\Product\ProductPageLoadedEvent" method="addDataToProductPage"/>
+        </service>
     </services>
 </container>
