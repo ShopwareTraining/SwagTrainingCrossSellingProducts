@@ -1,1 +1,14 @@
-<h1>Helllo World</h1>
+<sw-card
+        title="Upselling"
+        position-identifier="sw-product-detail-upselling"
+>
+    <sw-entity-multi-id-select
+            :context="context"
+            :criteria="criteria"
+            :ids="productIds"
+            :repository="repository"
+            @change="updateProductIds"
+    ></sw-entity-multi-id-select>
+
+    <p>Currently selected: {{ getProductIds }}</p>
+</sw-card>
