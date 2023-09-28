@@ -6,6 +6,7 @@
 
     <services>
         <service id="SwagTraining\CrossSellingProducts\Event\AddCrossSellingProductsToProductPageListener">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <tag name="kernel.event_listener" event="Shopware\Storefront\Page\Product\ProductPageLoadedEvent" method="addDataToProductPage"/>
         </service>
     </services>
