@@ -3,21 +3,6 @@
 {% set upsellingProducts = config('SwagTrainingUpsellingProducts.config.products') %}
 
 {% block page_content %}
-    <div class="container">
-        {{ dump(page.product) }}
-        <div class="row row-cols-3">
-            {% for product in upsellingProducts %}
-                <div>
-                    {% sw_thumbnails 'my-thumbnails' with {
-                        media: product.cover.media
-                    } %}
-
-                    <h3>{{ product.translated.name }}</h3>
-                    <strong>{{ product.translated.description }}</strong>
-                </div>
-            {% endfor %}
-        </div>
-
-    </div>
     {{ parent() }}
+    {% sw_include '@SwagTrainingUpsellingProducts/storefront/page/product/upselling-listing.html.twig' %}
 {% endblock %}

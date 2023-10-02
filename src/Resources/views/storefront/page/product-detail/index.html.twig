@@ -1,0 +1,6 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig' %}
+
+{% block page_product_detail_content %}
+    {{ parent() }}
+    {% sw_include '@SwagTrainingUpsellingProducts/storefront/page/product/upselling-listing.html.twig' %}
+{% endblock %}

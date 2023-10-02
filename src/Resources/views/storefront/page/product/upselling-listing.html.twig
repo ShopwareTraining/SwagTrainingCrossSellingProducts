@@ -1,0 +1,26 @@
+{% set upsellingProducts = page.product.extensions.upsellingProducts.elements %}
+
+{% set mediaIds = [] %}
+{% for upsellingProduct in upsellingProducts %}
+    {% set mediaId = upsellingProduct.upselling_product.coverId %}
+    {% set mediaIds = mediaIds|merge([mediaId]) %}
+{% endfor %}
+
+{% set mediaCollection = searchMedia(mediaIds, context.context) %}
+
+<div class="container">
+    <div class="row row-cols-3">
+        {% for upsellingProduct in upsellingProducts %}
+            {% set product = upsellingProduct.upselling_product %}
+            <div class="border m-2">
+                {% set coverMedia = mediaCollection.get(product.coverId) %}
+                {% sw_thumbnails 'my-thumbnails' with {
+                    media: coverMedia
+                } %}
+
+                <h3>{{ product.translated.name }}</h3>
+                <strong>{{ product.translated.description|raw }}</strong>
+            </div>
+        {% endfor %}
+    </div>
+</div>

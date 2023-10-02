@@ -8,6 +8,8 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 
 class UpsellingEntity extends Entity
 {
+    use EntityIdTrait;
+
     protected string $productId = '';
     protected string $upsellingProductId = '';
     protected ?ProductEntity $product = null;

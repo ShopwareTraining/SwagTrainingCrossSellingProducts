@@ -34,6 +34,7 @@ class CreateCommand extends Command
 
         $this->entityRepository->upsert([
             [
+                'id' => Uuid::fromStringToHex($productId.$upsellingProductId),
                 'productId' => $productId,
                 'upsellingProductId' => $upsellingProductId,
             ]

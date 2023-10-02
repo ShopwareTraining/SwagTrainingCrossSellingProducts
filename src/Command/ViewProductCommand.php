@@ -7,6 +7,7 @@ use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
+use SwagTraining\UpsellingProducts\Entity\UpsellingEntity;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -35,7 +36,6 @@ class ViewProductCommand extends Command
 
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter('id', $productId));
-        $criteria->addAssociation('upsellingProducts');
 
         $result = $this->productRepository->search($criteria, Context::createDefaultContext());
         $product = $result->getEntities()->first();
@@ -43,11 +43,20 @@ class ViewProductCommand extends Command
         /** @var ProductEntity $product */
         if (false === $product->hasExtension('upsellingProducts')) {
             $output->writeln('<error>upsellingProducts extension is not available</error>');
+
+            return Command::FAILURE;
         }
 
+        /** @var UpsellingEntity[] $upsellingProducts */
         $upsellingProducts = $product->getExtension('upsellingProducts');
+        if (empty($upsellingProducts)) {
+            $output->writeln('<error>No upselling products found for this product</error>');
+
+            return Command::FAILURE;
+        }
+
         foreach ($upsellingProducts as $upsellingProduct) {
-            $output->writeln("Upselling product: ".$upsellingProduct->getId()."\n");
+            $output->writeln('Upselling product: '.$upsellingProduct->getUpsellingProductId());
         }
 
         return Command::SUCCESS;
