@@ -1,14 +1,13 @@
 <sw-card
-        title="Upselling"
+        :title="$tc('upsellingProducts.title')"
         position-identifier="sw-product-detail-upselling"
 >
     <sw-entity-multi-id-select
+            v-if="upsellingProductIds"
             :context="context"
             :criteria="criteria"
-            :ids="productIds"
-            :repository="repository"
-            @change="updateProductIds"
+            :ids="upsellingProductIds"
+            :repository="productRepository"
+            @change="updateUpsellingProductIds"
     ></sw-entity-multi-id-select>
-
-    <p>Currently selected: {{ getProductIds }}</p>
 </sw-card>
