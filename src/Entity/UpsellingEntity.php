@@ -43,4 +43,14 @@ class UpsellingEntity extends Entity
     {
         $this->product = $product;
     }
+
+    public function getUpsellingProduct(): ?ProductEntity
+    {
+        return $this->upsellingProduct;
+    }
+
+    public function setUpsellingProduct(?ProductEntity $upsellingProduct): void
+    {
+        $this->upsellingProduct = $upsellingProduct;
+    }
 }

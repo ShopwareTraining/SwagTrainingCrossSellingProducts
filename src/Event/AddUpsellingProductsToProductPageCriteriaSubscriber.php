@@ -5,7 +5,7 @@ namespace SwagTraining\UpsellingProducts\Event;
 use Shopware\Storefront\Page\Product\ProductPageCriteriaEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AddUpsellingProductsToProductPageSubscriber implements EventSubscriberInterface
+class AddUpsellingProductsToProductPageCriteriaSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
@@ -16,6 +16,6 @@ class AddUpsellingProductsToProductPageSubscriber implements EventSubscriberInte
 
     public function addAssociationToCriteria(ProductPageCriteriaEvent $event)
     {
-        $event->getCriteria()->addAssociation('upsellingProducts.upsellingProduct');
+        $event->getCriteria()->addAssociation('upsellingProducts');
     }
 }

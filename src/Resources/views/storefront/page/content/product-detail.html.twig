@@ -4,5 +4,7 @@
 
 {% block page_content %}
     {{ parent() }}
-    {% sw_include '@SwagTrainingUpsellingProducts/storefront/page/product/upselling-listing.html.twig' %}
+    {% if page.product.extensions.upsellingProducts.elements %}
+        {% sw_include '@SwagTrainingUpsellingProducts/storefront/page/product/upselling-listing.html.twig' %}
+    {% endif %}
 {% endblock %}

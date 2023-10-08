@@ -1,26 +1,16 @@
 {% set upsellingProducts = page.product.extensions.upsellingProducts.elements %}
 
-{% set mediaIds = [] %}
-{% for upsellingProduct in upsellingProducts %}
-    {% set mediaId = upsellingProduct.upselling_product.coverId %}
-    {% set mediaIds = mediaIds|merge([mediaId]) %}
-{% endfor %}
-
-{% set mediaCollection = searchMedia(mediaIds, context.context) %}
-
 <div class="container">
+    <h3>{{ 'upsellingProducts.title'|trans }}</h3>
     <div class="row row-cols-3">
         {% for upsellingProduct in upsellingProducts %}
-            {% set product = upsellingProduct.upselling_product %}
-            <div class="border m-2">
-                {% set coverMedia = mediaCollection.get(product.coverId) %}
-                {% sw_thumbnails 'my-thumbnails' with {
-                    media: coverMedia
+            {% block element_product_box_inner %}
+                {% sw_include '@Storefront/storefront/component/product/card/box.html.twig' with {
+                    'product': upsellingProduct.upsellingProduct,
+                    'layout': 'standard',
+                    'displayMode': 'standard'
                 } %}
-
-                <h3>{{ product.translated.name }}</h3>
-                <strong>{{ product.translated.description|raw }}</strong>
-            </div>
+            {% endblock %}
         {% endfor %}
     </div>
 </div>
